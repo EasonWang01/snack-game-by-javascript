@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+<style>
+table {
+    width:80%;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+td{
+  width:2px;
+  
+}
+</style>
+</head>
+
+<body>
+
+<table>
+  <tr>
+   <td></td>
+    <td></td>		
+    <td></td>
+     <td></td>
+     <td></td>		
+    <td></td>
+     <td></td>
+     <td></td>		
+    <td></td>
+     <td></td>
+     <td></td>		
+    <td></td>
+  </tr>
+  <tr>
+     <td></td>
+     <td></td>		
+    <td></td>
+       <td></td>
+     <td></td>		
+    <td></td>
+       <td></td>
+     <td></td>		
+    <td></td>
+       <td></td>
+     <td></td>		
+    <td></td>
+  <tr>
+   <td></td>
+     <td></td>		
+    <td></td>
+       <td></td>
+     <td></td>		
+    <td></td>
+       <td></td>
+     <td></td>		
+    <td></td>
+       <td></td>
+     <td></td>		
+    <td></td>
+  </tr>
+  <tr>
+      <td></td>
+     <td></td>		
+    <td></td>
+       <td></td>
+     <td></td>		
+    <td></td>
+       <td></td>
+     <td></td>		
+    <td></td>
+       <td></td>
+     <td></td>		
+    <td></td>
+  </tr>
+</table>
+
+
+<table>
+  <tr>
+   <td></td>
+     <td></td>		
+    <td></td>
+       <td></td>
+     <td></td>		
+    <td></td>
+       <td></td>
+     <td></td>		
+    <td></td>
+       <td></td>
+     <td></td>		
+    <td></td>
+  </tr>
+  <tr>
+     <td></td>
+     <td></td>		
+    <td></td>
+       <td></td>
+     <td></td>		
+    <td></td>
+       <td></td>
+     <td></td>		
+    <td></td>
+       <td></td>
+     <td></td>		
+    <td></td>
+  <tr>
+   <td></td>
+     <td></td>		
+    <td></td>
+       <td></td>
+     <td></td>		
+    <td></td>
+       <td></td>
+     <td></td>		
+    <td></td>
+       <td></td>
+     <td></td>		
+    <td></td>
+  </tr>
+  <tr>
+      <td></td>
+     <td></td>		
+    <td></td>
+       <td></td>
+     <td></td>		
+    <td></td>
+       <td></td>
+     <td></td>		
+    <td></td>
+       <td></td>
+     <td></td>		
+    <td></td>
+  </tr>
+</table>
+
+<script>
+var x = $("td").width();
+$("td").height(x);
+
+$(window).resize(function() {
+ var x = $("td").width();
+$("td").height(x);
+});
+
+for(i=0;i < $("td").length;i++){
+	var as = $("td")[i];//as會變為plain HTML   <tr>..</tr>
+	$(as).attr('id',i);//所以要再用jquery包起來
+
+
+};
+
+var current = 0;
+var direction ="right";//一開始的前進方向
+var currentBody=[current];
+
+
+
+var apple = Math.floor((Math.random() * 95) + 1);//產生一個隨機的蘋果
+$("#"+(apple)).css('background','red');//
+
+document.onkeydown = function(key){
+
+if (key.code=='ArrowLeft') { 
+	
+	direction ="left";
+	current-=2;
+
+}else if(key.code=="ArrowRight"){
+	direction ="right";
+    current+=2;
+}else if(key.code=="ArrowUp"){
+	direction ="up";
+
+}else if(key.code=="ArrowDown"){
+	direction ="down";
+    current+=12;
+
+}
+
+
+}
+   
+for(i=0;i<currentBody.length;i++){//一開始的黑色
+$("#"+currentBody[i]).css('background','black')
+ };
+
+setInterval(function(){
+
+
+
+
+
+ if(direction=="right"){
+
+ 	if(currentBody[0]!=11&&currentBody[0]!=23&&currentBody[0]!=35&&currentBody[0]!=47&&currentBody[0]!=59&&currentBody[0]!=71&&currentBody[0]!=83&&currentBody[0]!=95){
+	
+   current=currentBody[((currentBody.length)-1)];//a[3]為最後一元素但a.length為4，所以減1，current表示蛇陣列的尾巴id，記錄上一輪尾巴的坐標
+
+ 	currentBody[0]+=1;
+    for(i=1;i<currentBody.length;i++){///前進時後一個元素id護變為前一個id
+    currentBody[i]=currentBody[i-1]
+    
+    };
+    
+$("#"+(current)).css("background","white");
+
+
+
+for(i=0;i<currentBody.length;i++){//蛇的陣列元素是黑色
+$("#"+currentBody[i]).css('background','black')
+ };
+
+	/*if(current==apple){
+	currentBody.push(apple)
+	apple = Math.floor((Math.random() * 95) + 1);//產生一個隨機的蘋果
+
+$("#"+(apple)).css('background','red');//讓蘋果的位置是紅色
+	console.log(currentBody);
+    };
+*/
+ }
+ };
+ if(direction=="left"){
+ 	if(currentBody[0]!=0&&currentBody[0]!=12&&currentBody[0]!=24&&currentBody[0]!=36&&currentBody[0]!=48&&currentBody[0]!=60&&currentBody[0]!=72&&currentBody[0]!=84){
+
+   current=currentBody[((currentBody.length)-1)];//a[3]為最後一元素但a.length為4，所以減1，current表示蛇陣列的尾巴id，記錄上一輪尾巴的坐標
+
+ 	currentBody[0]-=1;
+    for(i=1;i<currentBody.length;i++){///前進時後一個元素id護變為前一個id
+    currentBody[i]=currentBody[i-1]
+    
+    };
+    
+$("#"+(current)).css("background","white");
+
+
+
+for(i=0;i<currentBody.length;i++){//蛇的陣列元素是黑色
+$("#"+currentBody[i]).css('background','black')
+ };
+
+
+
+ }
+ };
+ if(direction=="down"){
+ 	if(currentBody[0]!=84&&currentBody[0]!=85&&currentBody[0]!=86&&currentBody[0]!=87&&currentBody[0]!=88&&currentBody[0]!=89&&currentBody[0]!=90&&currentBody[0]!=91&&currentBody[0]!=92&&currentBody[0]!=93&&currentBody[0]!=94&&currentBody[0]!=95){
+
+
+   current=currentBody[((currentBody.length)-1)];//a[3]為最後一元素但a.length為4，所以減1，記錄上一輪尾巴的坐標
+
+ 	currentBody[0]+=12;
+    for(i=1;i<currentBody.length;i++){///前進時後一個元素id護變為前一個id
+    currentBody[i]=currentBody[i-1]
+    
+    };
+    
+$("#"+(current)).css("background","white");
+
+
+
+for(i=0;i<currentBody.length;i++){//蛇的陣列元素是黑色
+$("#"+currentBody[i]).css('background','black')
+ };
+
+ }
+ };
+ if(direction=="up"){
+ 	if(currentBody[0]!=0&&currentBody[0]!=1&&currentBody[0]!=2&&currentBody[0]!=3&&currentBody[0]!=4&&currentBody[0]!=5&&currentBody[0]!=6&&currentBody[0]!=7&&currentBody[0]!=8&&currentBody[0]!=9&&currentBody[0]!=10&&currentBody[0]!=11){
+	
+
+   current=currentBody[((currentBody.length)-1)];//a[3]為最後一元素但a.length為4，所以減1，記錄上一輪尾巴的坐標
+
+ 	currentBody[0]-=12;//往上移動所以id-12
+    for(i=1;i<currentBody.length;i++){///前進時後一個元素id護變為前一個id
+    currentBody[i]=currentBody[i-1]
+    
+    };
+    
+$("#"+(current)).css("background","white");
+
+
+
+for(i=0;i<currentBody.length;i++){//蛇的陣列元素是黑色
+$("#"+currentBody[i]).css('background','black')
+ };
+ }
+ };
+},300);
+
+
+
+
+
+</script>
+
+</body>
+
+
+
+</html>
